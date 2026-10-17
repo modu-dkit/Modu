@@ -1,4 +1,4 @@
-# Museo
+# Modu
 
 
 **A virtual wardrobe and shopping app: scan your clothes, discover real items from Irish and UK shops, try outfits on your own avatar, and buy in one tap.**
@@ -25,7 +25,7 @@ DkIT Collaborative Project 2026/27       5-person team
 
 ## Overview
 
-Museo connects the clothes you already own with the clothes you might buy. You scan your wardrobe, the app learns your style, shows you real items from Irish and UK shops, and lets you see them on an avatar built from your own measurements before you spend anything.
+Modu connects the clothes you already own with the clothes you might buy. You scan your wardrobe, the app learns your style, shows you real items from Irish and UK shops, and lets you see them on an avatar built from your own measurements before you spend anything.
 
 **Target users (to be confirmed):** 
 
@@ -82,7 +82,7 @@ Only the API port is exposed. The database and models are internal.
 
 - **H&M Kaggle dataset:** demo and training
 - **Affiliate feeds:** Awin (M&S, River Island, Nike), Rakuten (Mango), Vestiaire Collective for second-hand | TBC
-- **Share-from-app:** the user shares an item from the H&M or Vinted app into Museo
+- **Share-from-app:** the user shares an item from the H&M or Vinted app into Modu
 - **Local shops** that give us permission | TBC 
 
 
@@ -101,7 +101,7 @@ Default stack.
 ##  Repository Structure
 
 ```
-Museo/
+Modu/
 ├── app/        Phone app (Expo / React Native)
 ├── api/        FastAPI server, database migrations, background jobs
 ├── ml/         Our models: notebooks, training, evaluation, inference
