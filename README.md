@@ -54,14 +54,6 @@ The scope is kept narrow on purpose:
 
 **Currently on Development**
 
-
-1. **App** (`app/`): the user-facing phone app. Talks only to the API.
-2. **API** (`api/`): authentication, business logic, database, background jobs. The only component that calls the ML models and paid APIs.
-3. **ML** (`ml/`): our own models, plus notebooks, training and evaluation.
-4. **Database:** Postgres with pgvector for similarity search over item and outfit embeddings.
-
-Only the API port is exposed. The database and models are internal.
-
 ---
 
 ## AI
@@ -82,7 +74,7 @@ Only the API port is exposed. The database and models are internal.
 
 - **H&M Kaggle dataset:** demo and training
 - **Affiliate feeds:** Awin (M&S, River Island, Nike), Rakuten (Mango), Vestiaire Collective for second-hand | TBC
-- **Share-from-app:** the user shares an item from the H&M or Vinted app into Modu
+- **Share-from-app:** the user shares an item from the H&M or Vinted app into Modu | TBC
 - **Local shops** that give us permission | TBC 
 
 
@@ -102,14 +94,15 @@ Default stack.
 
 ```
 Modu/
-├── app/        Phone app (Expo / React Native)
-├── api/        FastAPI server, database migrations, background jobs
-├── ml/         Our models: notebooks, training, evaluation, inference
+├── .github/    Pull request template (CI workflows go here too)
+├── ai/         Our models: notebooks, training, evaluation, inference
+├── backend/    FastAPI server: auth, business logic, background jobs
+├── database/   Postgres + pgvector: schema, migrations, seed data
 ├── docs/       Architecture, decisions, Scrum, design and testing docs
-└── .github/    Pull request and issue templates (CI workflows go here too)
+└── frontend/   Phone app (Expo / React Native)
 ```
 
-Each folder has its own `README.md` with the setup for that component.
+Each folder will get its own `README.md` with setup steps once work on that component starts.
 
 ---
 
@@ -139,11 +132,11 @@ Each folder has its own `README.md` with the setup for that component.
 
 | Name | Role | GitHub |
 | --- | --- | --- |
-| Sofia | Project Manager, UI/UX (Figma) | TODO |
-| Favour | Lead Frontend, Testing, AI (tagging and recommender) | TODO |
-| Harris | Security, Backend | TODO |
-| Cheryl | Backend, Database, Mahara | TODO |
-| Iker Arza | Testing, Cloud and Deployment, AI (body model) | TODO |
+| Sofia | Product Owner, Lead UI/UX Designer, Frontend, Scrum | [@vialsiu](https://github.com/vialsiu) |
+| Harris | Lead Security, Backend, AI | [@harrist03](https://github.com/harrist03) |
+| Iker Arza |Backend, System Architecture, Software Testing, AI | [@hypzx2105](https://github.com/hypzx2105) |
+| Favour | Lead Frontend Developer, Software Testing, UX Testing, Research | [@f4eriebambi](https://github.com/f4eriebambi) |
+| Cheryl | Lead Database, Backend, AI | [@hcheryl](https://github.com/cheryl7114) |
 
 ---
 
