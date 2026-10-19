@@ -9,17 +9,17 @@ DkIT Collaborative Project 2026/27       5-person team
 
 ## Table of Contents
 
-- [Overview](#-overview)
-- [Core Loop](#-core-loop)
-- [System Architecture](#️-system-architecture)
-- [AI](#-ai)
-- [Catalogue](#️-catalogue)
-- [Tech Stack](#️-tech-stack)
-- [Repository Structure](#-repository-structure)
-- [Getting Started](#-getting-started)
-- [Testing and Quality](#-testing-and-quality)
-- [Contributors](#-contributors)
-- [Resources](#-resources)
+- [Overview](#overview)
+- [Core Loop](#core-loop)
+- [System Architecture](#system-architecture)
+- [AI](#ai)
+- [Catalogue](#catalogue)
+- [Tech Stack](#tech-stack)
+- [Repository Structure](#repository-structure)
+- [Getting Started](#getting-started)
+- [Testing and Quality](#testing-and-quality)
+- [Contributors](#contributors)
+- [Resources](#resources)
 
 ---
 
@@ -50,9 +50,23 @@ The scope is kept narrow on purpose:
 
 ---
 
-##  System Architecture
+## System Architecture
 
-**Currently on Development**
+![Modu system architecture](docs/architecture.png)
+
+The app talks to one server on AWS (an EC2 instance in Ireland) over HTTPS. On the server everything runs in Docker containers with Docker Compose:
+
+- **Caddy** is the front door and the only public part (port 443). It handles HTTPS and passes requests to the backend.
+- **Backend (FastAPI + Uvicorn)** checks who the user is and that they own what they ask for, then talks to the database, storage and AI.
+- **Worker** runs the slow "Make it real" jobs in the background so the app never waits. The app polls the job status.
+- **AI service** runs our own models: body model, clothes tagger and recommender, plus FAISS for similar items.
+- **MySQL** stores users, items, tags, embeddings and try-on jobs.
+
+Outside the server: **Amazon S3** for photos (the database only keeps the path), **Google Sign-In** for login, **Google Gemini (Nano Banana)** for the photoreal try-on, and an optional result check with Claude Haiku (TBC). **GitHub Actions** tests, scans and deploys every change.
+
+**Request flow:** app → Caddy → Uvicorn → FastAPI route → MySQL, S3 or AI if needed → JSON back → Caddy → app
+
+Full details, ports, hosting costs and the reasons behind each choice are in [docs/facts.md](docs/facts.md). The diagram can be edited in [Excalidraw](https://excalidraw.com/#json=emM27aCyYjIGitOruHnrZ,k6bvx05Aj-GLQ9x1Xdf1zA).
 
 ---
 
@@ -68,7 +82,7 @@ The scope is kept narrow on purpose:
 
 ---
 
-##  Catalogue
+## Catalogue
 
 **No scraping.** Items come from:
 
@@ -82,22 +96,22 @@ The scope is kept narrow on purpose:
 
 ## Tech Stack
 
-Default stack. 
+Proposed stack, see [docs/facts.md](docs/facts.md) for the reasons and costs.
 
 | App | API | Data | AI | DevOps |
 | --- | --- | --- | --- | --- |
-| Expo (React Native)<br/>Expo SecureStore for tokens | FastAPI (Python)<br/>One router per feature<br/>Alembic migrations | Postgres<br/>pgvector | ANSUR II body model, Anny / SMPL-X<br/>FashionSigLIP / FashionCLIP<br/>H&M recommender<br/>Nano Banana | Docker(TBC) <br/>GitHub Actions CI<br/>Protected `main`, PR reviews |
+| Expo (React Native), PWA option<br/>Expo SecureStore for tokens<br/>Google Sign-In | FastAPI + Uvicorn (Python)<br/>One router per feature<br/>Alembic migrations<br/>Background worker for try-on jobs | MySQL 8.4<br/>Amazon S3 for photos | ANSUR II body model, Anny / SMPL-X<br/>rembg + FashionSigLIP / FashionCLIP<br/>H&M recommender + FAISS<br/>Nano Banana | AWS EC2 + Docker Compose<br/>Caddy (HTTPS)<br/>GitHub Actions CI/CD + security scans<br/>Protected `main`, PR reviews |
 
 ---
 
-##  Repository Structure
+## Repository Structure
 
 ```
 Modu/
 ├── .github/    Pull request template (CI workflows go here too)
 ├── ai/         Our models: notebooks, training, evaluation, inference
 ├── backend/    FastAPI server: auth, business logic, background jobs
-├── database/   Postgres + pgvector: schema, migrations, seed data
+├── database/   MySQL: schema, migrations, seed data
 ├── docs/       Architecture, decisions, Scrum, design and testing docs
 └── frontend/   Phone app (Expo / React Native)
 ```
@@ -106,7 +120,7 @@ Each folder will get its own `README.md` with setup steps once work on that comp
 
 ---
 
-##  Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -134,7 +148,7 @@ Each folder will get its own `README.md` with setup steps once work on that comp
 | --- | --- | --- |
 | Sofia | Product Owner, Lead UI/UX Designer, Frontend, Scrum | [@vialsiu](https://github.com/vialsiu) |
 | Harris | Lead Security, Backend, AI | [@harrist03](https://github.com/harrist03) |
-| Iker Arza |Backend, System Architecture, Software Testing, AI | [@hypzx2105](https://github.com/hypzx2105) |
+| Iker Arza | Cloud and Deployment, CI/CD, Backend, System Architecture, Software Testing | [@hypzx2105](https://github.com/hypzx2105) |
 | Favour | Lead Frontend Developer, Software Testing, UX Testing, Research | [@f4eriebambi](https://github.com/f4eriebambi) |
 | Cheryl | Lead Database, Backend, AI | [@hcheryl](https://github.com/cheryl7114) |
 
