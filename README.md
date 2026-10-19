@@ -64,7 +64,7 @@ The app talks to one server on AWS (an EC2 instance in Ireland) over HTTPS. On t
 
 Outside the server: **Amazon S3** for photos (the database only keeps the path), **Google Sign-In** for login, **Google Gemini (Nano Banana)** for the photoreal try-on, and an optional result check with Claude Haiku (TBC). **GitHub Actions** tests, scans and deploys every change.
 
-**Request flow:** app → Caddy → Uvicorn → FastAPI route → MySQL, S3 or AI if needed → JSON back → Caddy → app
+**Request flow:** app -> Caddy -> Uvicorn -> FastAPI route -> MySQL, S3 or AI if needed -> JSON back -> Caddy -> app
 
 Full details, ports, hosting costs and the reasons behind each choice are in [docs/facts.md](docs/facts.md). The diagram can be edited in [Excalidraw](https://excalidraw.com/#json=emM27aCyYjIGitOruHnrZ,k6bvx05Aj-GLQ9x1Xdf1zA).
 
