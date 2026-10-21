@@ -1,3 +1,5 @@
+"""SQLAlchemy database models"""
+
 from app.db.models.user import User
 from app.db.models.body_measurement import BodyMeasurement
 from app.db.models.owned_clothes import OwnedClothes
