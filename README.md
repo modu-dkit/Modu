@@ -136,6 +136,7 @@ Each folder will get its own `README.md` with setup steps once work on that comp
 
 - **Automated tests and CI from the start.** Tests run on every pull request.
 - **Ownership tests:** every API route has a test proving a user cannot read or change another user's data.
+- Run the backend tests from `backend/` with `python -m pytest`.
 - **AI evaluation:** each model is measured on accuracy, cost and time, with results kept in the repo.
 - Every pull request explains **how to test it** before it can be reviewed.
 - Bugs are reported with the **Bug report** issue template.
