@@ -56,9 +56,7 @@ def verify_google_id_token(token: str) -> dict[str, object]:
 
 def create_access_token(user_id: str) -> str:
     require_auth_configuration()
-    expires_at = datetime.now(UTC) + timedelta(
-        minutes=ACCESS_TOKEN_EXPIRE_MINUTES
-    )
+    expires_at = datetime.now(UTC) + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     return jwt.encode(
         {"sub": user_id, "exp": expires_at},
         JWT_SECRET_KEY,
