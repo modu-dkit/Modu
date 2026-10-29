@@ -47,6 +47,7 @@ export const spacing = {
 } as const;
 
 export const radius = {
+  button: 8,
   row: 14,
   card: 16,
   sheet: 28,
