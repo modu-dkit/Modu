@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from uuid import uuid4
 
 import jwt
@@ -56,7 +56,7 @@ def verify_google_id_token(token: str) -> dict[str, object]:
 
 def create_access_token(user_id: str) -> str:
     require_auth_configuration()
-    expires_at = datetime.now(timezone.utc) + timedelta(
+    expires_at = datetime.now(UTC) + timedelta(
         minutes=ACCESS_TOKEN_EXPIRE_MINUTES
     )
     return jwt.encode(

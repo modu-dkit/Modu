@@ -1,4 +1,4 @@
-from sqlalchemy import JSON, DECIMAL, ForeignKey, String, TEXT, TIMESTAMP, text
+from sqlalchemy import JSON, TEXT, TIMESTAMP, ForeignKey, String, text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base
