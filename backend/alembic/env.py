@@ -1,10 +1,11 @@
-from logging.config import fileConfig
 import os
 import sys
+from logging.config import fileConfig
 from pathlib import Path
 
 from dotenv import load_dotenv
 from sqlalchemy import engine_from_config, pool
+
 from alembic import context
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -13,8 +14,8 @@ load_dotenv(ROOT / ".env")
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from app.db.base import Base
-import app.db.models
+import app.db.models  # noqa: E402, F401
+from app.db.base import Base  # noqa: E402
 
 config = context.config
 

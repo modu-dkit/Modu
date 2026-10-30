@@ -10,7 +10,6 @@ from app.auth import (
 from app.db.models.user import User
 from app.db.session import get_db
 
-
 app = FastAPI(title="Modu API")
 auth_router = APIRouter(prefix="/auth", tags=["auth"])
 
